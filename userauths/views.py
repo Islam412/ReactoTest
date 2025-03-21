@@ -70,3 +70,9 @@ def login_view(request):
         return redirect("account:account")
 
     return render(request, 'userauths/sign-in.html')
+
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'You have been logged out')
+    return redirect('userauths:sign-in')
