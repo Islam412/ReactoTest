@@ -1,4 +1,7 @@
 from django.contrib import admin
+
+
+from import_export.admin import ImportExportModelAdmin
 from userauths.models import User , Account , KYC
 
 
@@ -19,7 +22,7 @@ class UserCustomAdmin(admin.ModelAdmin):
 
 
 class AccountAdminModel(ImportExportModelAdmin):
-    list_editable = ['account_status', 'account_balance', 'kyc_submitted', 'kyc_confirmed'] 
+    list_editable = ['account_status', 'kyc_submitted', 'kyc_confirmed'] 
     list_display = ['user', 'account_number' ,'account_status', 'kyc_submitted', 'kyc_confirmed'] 
     list_filter = ['account_status']
     search_fields = ['user__username', 'user__email', 'account_number']
