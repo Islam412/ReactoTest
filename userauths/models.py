@@ -7,6 +7,13 @@ from shortuuid.django_fields import ShortUUIDField
 # Create your models here.
 
 
+def user_directory_path(instance, filename):
+    ext = filename.split(".")[-1]
+    filename = "%s_%s" % (instance.id, ext)
+    return "user_{0}/{1}".format(instance.user.id, filename)
+
+
+
 class User(AbstractUser):
     username = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
