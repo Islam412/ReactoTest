@@ -1,6 +1,8 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 from .models import User , Account , KYC
 from .forms import UserRegisterForm , KYCForm
@@ -12,7 +14,7 @@ from .forms import UserRegisterForm , KYCForm
 def register_view(request):
     if request.user.is_authenticated:
         messages.warning(request, f"You are already logged in.")
-        return redirect("account:account")
+        return redirect("userauths:account")
 
     
     if request.method == 'POST':
@@ -29,7 +31,7 @@ def register_view(request):
             )
 
             login(request, new_user)
-            return redirect("account:account")
+            return redirect("userauths:account")
         
 
     else:
