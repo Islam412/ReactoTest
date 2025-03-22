@@ -1,10 +1,13 @@
-{% extends "auth_base.html" %}
+{% comment %} {% extends "auth_base.html" %} {% endcomment %}
+{% load static %}
 
 {% block content %}
     <h2>Are you sure you want to delete your account?</h2>
+    <p>This action cannot be undone. All your data will be permanently removed.</p>
+    
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Yes, Delete My Account</button>
-        <a href="{% url 'userauths:account' %}">Cancel</a>
+        <button type="submit" style="background-color: red; color: white;">Yes, Delete My Account</button>
+        <a href="{% url 'userauths:account' %}" style="margin-left: 10px;">Cancel</a>
     </form>
-{% endblock %}
+{% endblock content %}

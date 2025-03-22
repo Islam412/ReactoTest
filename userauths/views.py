@@ -137,6 +137,9 @@ def account(request):
 def delete_account(request):
     user = request.user
     if request.method == "POST":
+        Account.objects.filter(user=user).delete()
+        KYC.objects.filter(user=user).delete()
+
         user.delete()
         messages.success(request, "Your account has been deleted successfully.")
         return redirect("userauths:sign-in")
