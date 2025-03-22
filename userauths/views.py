@@ -60,7 +60,7 @@ def login_view(request):
             if user is not None: # if there is a user
                 login(request, user)
                 messages.success(request, "You are logged.")
-                return redirect("account:account")
+                return redirect("userauths:account")
             else:
                 messages.warning(request, "Username or password does not exist")
                 return redirect("userauths:sign-in")
@@ -69,7 +69,7 @@ def login_view(request):
 
     if request.user.is_authenticated:
         messages.success(request, 'You are already logged in')
-        return redirect("account:account")
+        return redirect("userauths:account")
 
     return render(request, 'userauths/sign-in.html')
 
