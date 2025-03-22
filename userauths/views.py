@@ -154,7 +154,7 @@ def change_password(request):
         form = UserPasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # عشان يفضل المستخدم متسجل بعد تغيير الباسورد
+            update_session_auth_hash(request, user) 
             messages.success(request, 'Your password has been updated successfully!')
             return redirect('userauths:account')
         else:
@@ -162,4 +162,4 @@ def change_password(request):
     else:
         form = UserPasswordChangeForm(request.user)
 
-    return render(request, 'userauths/change_password.html', {'form': form})
+    return render(request, 'userauths/account.html', {'form': form})
