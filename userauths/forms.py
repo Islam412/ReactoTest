@@ -28,13 +28,11 @@ class KYCForm(forms.ModelForm):
 
     class Meta:
         model = KYC
-        fields = [ 'full_name', 'image', 'marrital_status', 'gender', 'identity_type', 'identity_image', 'date_of_birth', 'signature', 'country', 'state', 'city', 'mobile', 'fax']
+        fields = [ 'frist_name', 'last_name' , 'image', 'marrital_status', 'gender',  'date_of_birth', 'signature', 'company' , 'mobile']
         widgets = {
-            "full_name": forms.TextInput(attrs={"placeholder":"Full Name"}),
+            "frist_name": forms.TextInput(attrs={"placeholder":"Frist Name"}),
+            "last_name": forms.TextInput(attrs={"placeholder":"Last Name"}),
             "mobile": forms.TextInput(attrs={"placeholder":"Mobile Number"}),
-            "fax": forms.TextInput(attrs={"placeholder":"Fax Number"}),
-            "country": forms.TextInput(attrs={"placeholder":"Country"}),
-            "state": forms.TextInput(attrs={"placeholder":"State"}),
-            "city": forms.TextInput(attrs={"placeholder":"City"}),
+            "company": forms.TextInput(attrs={"placeholder":"Company"}),
             'date_of_birth':DateInput
         }
