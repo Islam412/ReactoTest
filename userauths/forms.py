@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm , PasswordChangeForm
 from django.forms import ImageField, FileInput, DateInput
+
 
 from .models import User , KYC
 
@@ -34,3 +35,11 @@ class KYCForm(forms.ModelForm):
             "company": forms.TextInput(attrs={"placeholder":"Company"}),
             'date_of_birth':DateInput
         }
+
+
+class UserPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordChangeForm, self).__init__(*args, **kwargs)
+        self.fields['old_password'].widget.attrs['placeholder'] = 'Old Password'
+        self.fields['new_password1'].widget.attrs['placeholder'] = 'New Password'
+        self.fields['new_password2'].widget.attrs['placeholder'] = 'Confirm New Password'

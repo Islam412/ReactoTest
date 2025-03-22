@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from .models import User , Account , KYC
-from .forms import UserRegisterForm , KYCForm
+from .forms import UserRegisterForm , KYCForm , UserPasswordChangeForm
 
 
 # Create your views here.
