@@ -130,3 +130,15 @@ def account(request):
         "account":account,
     }
     return render(request, "userauths/account.html", context)
+
+
+
+@login_required
+def delete_account(request):
+    user = request.user
+    if request.method == "POST":
+        user.delete()
+        messages.success(request, "Your account has been deleted successfully.")
+        return redirect("userauths:sign-in")
+
+    return render(request, "userauths/delete_account.html")
