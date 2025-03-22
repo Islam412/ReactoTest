@@ -11,5 +11,5 @@ urlpatterns = [
     path('sign-in/', views.login_view, name='sign-in'),
     path('sign-out/', views.logout_view, name='sign-out'),
     path('profile-edit/', views.kyc_registration, name='kyc-registration'),
-    path('profile', views.account, name='account'),
+    path('account', views.account, name='account'),
 ]

@@ -94,7 +94,6 @@ class KYC(models.Model):
     marrital_status = models.CharField(choices=MARITAL_STATUS, max_length=40)
     gender = models.CharField(choices=GENDER, max_length=40)
     date_of_birth = models.DateTimeField(auto_now_add=False)
-    signature = models.ImageField(upload_to="kyc")
     company = models.CharField(max_length=100)
     mobile = models.CharField(max_length=1000)
     date = models.DateTimeField(auto_now_add=True)

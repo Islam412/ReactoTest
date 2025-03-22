@@ -185,11 +185,11 @@
                                     <i class="fa-solid fa-sort-down"></i>
                                 </div>
                                 <div class="main-area user-content">
-                                    <form action="{% url 'account:account' %}">
+                                    <form action="{% url 'userauths:account' %}">
                                         <div class="head-area d-flex align-items-center">
                                             <div class="profile-img">
                                                 {% if kyc.image %}
-                                                    <a href="{% url 'account:account' %}">
+                                                    <a href="{% url 'userauths:account' %}">
                                                         <img src="{{user.kyc.image.url}}" alt="image">
                                                     </a>
                                                 {% else %}
@@ -197,7 +197,7 @@
                                                 {% endif %}
                                             </div>
                                             <div class="profile-head">
-                                                <a href="{% url 'account:account' %}">
+                                                <a href="{% url 'userauths:account' %}">
                                                     <h5>{{request.user.username|title}}</h5>
                                                 </a>
                                                 <p class="wallet-id">Account No: {{account.account_number}}</p>
@@ -208,7 +208,7 @@
                                     
                                     <ul>
                                         <li class="border-area">
-                                            <a href="{% url 'account:kyc-registration' %}"><i class="fas fa-cog"></i>Settings</a>
+                                            <a href="{% url 'userauths:kyc-registration' %}"><i class="fas fa-cog"></i>Settings</a>
                                         </li>
                                         <li>
                                             <a href="{% url 'userauths:sign-out' %}"><i class="fas fa-sign-out"></i>Logout</a>
@@ -274,7 +274,7 @@
                         </ul>
                         <ul class="bottom-item">
                             <li class="">
-                                <a href="{% url 'account:account' %}">
+                                <a href="{% url 'userauths:account' %}">
                                     <img src="{% static 'assets1/images/icon/account.png' %}" alt="Account"> <span>Account</span>
                                 </a>
                             </li>
@@ -289,15 +289,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="pt-120">
-                            <div class="invite-now">
-                                <div class="img-area">
-                                    <img src="{% static 'assets1/images/invite-now-illus.png' %}" alt="Image">
-                                </div>
-                                <p>Invite your friend and get $25</p>
-                                <a href="javascript:void(0)" class="cmn-btn">Invite Now</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

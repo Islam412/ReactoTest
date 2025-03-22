@@ -22,13 +22,11 @@ class DateInput(forms.DateInput):
 
 
 class KYCForm(forms.ModelForm):
-    identity_image = ImageField(widget=FileInput)
     image = ImageField(widget=FileInput)
-    signature = ImageField(widget=FileInput)
 
     class Meta:
         model = KYC
-        fields = [ 'frist_name', 'last_name' , 'image', 'marrital_status', 'gender',  'date_of_birth', 'signature', 'company' , 'mobile']
+        fields = [ 'frist_name', 'last_name' , 'image', 'marrital_status', 'gender',  'date_of_birth', 'company' , 'mobile']
         widgets = {
             "frist_name": forms.TextInput(attrs={"placeholder":"Frist Name"}),
             "last_name": forms.TextInput(attrs={"placeholder":"Last Name"}),
