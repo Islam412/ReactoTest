@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.utils.translation import gettext_lazy as _
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 import uuid
 from shortuuid.django_fields import ShortUUIDField
 
@@ -17,8 +19,13 @@ def user_directory_path(instance, filename):
 
 
 class User(AbstractUser):
+    frist_name = models.CharField(_('Username'), max_length=255)
+    last_name = models.CharField(_('Username'), max_length=255)
     username = models.CharField(_('Username'), max_length=255)
     email = models.EmailField(_('Email'), unique=True)
+    phone = PhoneNumberField(_("Phone Number"), unique=True)
+    date_of_birth = models.DateTimeField(_('Date Of Birth'), auto_now_add=False)
+    company = models.CharField(_('Company'), max_length=255)
     is_staff = models.BooleanField(_('Is Staff'), default=False)
     is_superuser = models.BooleanField(_('Super User'), default=False)
 
