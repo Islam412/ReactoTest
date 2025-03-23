@@ -5,58 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Account</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            backdrop-filter: blur(20px);
-            border-radius: 15px;
-            padding: 20px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .card:hover {
-            transform: scale(1.03);
-        }
-        .btn-danger {
-            background-color: #ff4b5c;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        .btn-danger:hover {
-            background-color: #e63950;
-            transform: scale(1.05);
-        }
-        .btn-info {
-            background-color: #17c3b2;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        .btn-info:hover {
-            background-color: #149e91;
-            transform: scale(1.05);
-        }
-    </style>
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card shadow-lg text-center" style="max-width: 400px;">
+        <div class="card shadow-lg p-4 text-center" style="max-width: 400px;">
             <div class="card-body">
-                <h2 class="text-warning fw-bold">Are you sure?</h2>
-                <p class="text-light">This action is irreversible. All your data will be permanently deleted.</p>
+                <h2 class="text-danger mb-3">Are you sure you want to delete your account?</h2>
+                <p class="text-muted">This action cannot be undone. All your data will be permanently deleted.</p>
                 
                 <form method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger btn-lg w-100 mb-2 shadow">
+                    <button type="submit" class="btn btn-danger btn-lg w-100 mb-2">
                         Yes, Delete My Account
                     </button>
-                    <a href="{% url 'userauths:account' %}" class="btn btn-info btn-lg w-100 shadow">
+                    <a href="{% url 'userauths:account' %}" class="btn btn-outline-secondary btn-lg w-100">
                         Cancel
                     </a>
                 </form>
