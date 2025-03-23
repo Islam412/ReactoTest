@@ -19,7 +19,7 @@ def user_directory_path(instance, filename):
 
 
 class User(AbstractUser):
-    frist_name = models.CharField(_('Frist Name'), max_length=255)
+    first_name = models.CharField(_('First Name'), max_length=255)
     last_name = models.CharField(_('Last Name'), max_length=255)
     username = models.CharField(_('Username'), max_length=255)
     email = models.EmailField(_('Email'), unique=True)
