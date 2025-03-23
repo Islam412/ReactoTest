@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os
 
@@ -147,6 +147,17 @@ MEDIA_ROOT=BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+# translate settings
+LOCALE_PATHS = ["locale",]
+
+# select language
+LANGUAGES = [
+    ("ar", _("Arabic")),
+    ("en", _("English")),
+    ('ru', _('Russian')),
+]
 
 
 # JAZZMIN settings

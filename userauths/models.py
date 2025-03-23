@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
+from django.utils.translation import gettext_lazy as _
 
 import uuid
 from shortuuid.django_fields import ShortUUIDField
@@ -16,10 +17,10 @@ def user_directory_path(instance, filename):
 
 
 class User(AbstractUser):
-    username = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    username = models.CharField(_('Username'), max_length=255)
+    email = models.EmailField(_('Email'), unique=True)
+    is_staff = models.BooleanField(_('Is Staff'), default=False)
+    is_superuser = models.BooleanField(_('Super User'), default=False)
 
 
     USERNAME_FIELD = "email"
