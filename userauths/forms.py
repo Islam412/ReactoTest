@@ -4,7 +4,7 @@ from django.forms import ImageField, FileInput, DateInput
 from phonenumber_field.formfields import PhoneNumberField
 
 
-from .models import User , KYC
+from .models import User 
 
 
 class UserRegisterForm(UserCreationForm):
@@ -12,7 +12,7 @@ class UserRegisterForm(UserCreationForm):
     last_name = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Last Name"}))
     username = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Username"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={"placeholder":"Email"}))
-    phone = PhoneNumberField(widget=forms.NumberInput(attrs={"placeholder": "Phone"}))
+    phone = forms.CharField(widget=forms.NumberInput(attrs={"placeholder": "Phone"}))
     date_of_birth = forms.DateTimeField(widget=forms.DateInput(attrs={"type": "date", "placeholder": "Date of Birth"}))
     company = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Company"}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password"}))
@@ -28,19 +28,19 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 
-class KYCForm(forms.ModelForm):
-    image = ImageField(widget=FileInput)
+# class KYCForm(forms.ModelForm):
+#     image = ImageField(widget=FileInput)
 
-    class Meta:
-        model = KYC
-        fields = [ 'frist_name', 'last_name' , 'image', 'marrital_status', 'gender',  'date_of_birth', 'company' , 'mobile']
-        widgets = {
-            "frist_name": forms.TextInput(attrs={"placeholder":"Frist Name"}),
-            "last_name": forms.TextInput(attrs={"placeholder":"Last Name"}),
-            "mobile": forms.TextInput(attrs={"placeholder":"Mobile Number"}),
-            "company": forms.TextInput(attrs={"placeholder":"Company"}),
-            'date_of_birth':DateInput
-        }
+#     class Meta:
+#         model = KYC
+#         fields = [ 'frist_name', 'last_name' , 'image', 'marrital_status', 'gender',  'date_of_birth', 'company' , 'mobile']
+#         widgets = {
+#             "frist_name": forms.TextInput(attrs={"placeholder":"Frist Name"}),
+#             "last_name": forms.TextInput(attrs={"placeholder":"Last Name"}),
+#             "mobile": forms.TextInput(attrs={"placeholder":"Mobile Number"}),
+#             "company": forms.TextInput(attrs={"placeholder":"Company"}),
+#             'date_of_birth':DateInput
+#         }
 
 
 class UserPasswordChangeForm(PasswordChangeForm):

@@ -23,7 +23,7 @@ class User(AbstractUser):
     last_name = models.CharField(_('Last Name'), max_length=255)
     username = models.CharField(_('Username'), max_length=255)
     email = models.EmailField(_('Email'), unique=True)
-    phone = PhoneNumberField(_("Phone Number"), unique=True, null=True, blank=True)
+    phone = models.CharField(_("Phone Number"),max_length=50, null=True, blank=True)
     date_of_birth = models.DateTimeField(_('Date Of Birth'), auto_now_add=False , null=True, blank=True)
     company = models.CharField(_('Company'), max_length=255 , null=True, blank=True)
     is_staff = models.BooleanField(_('Is Staff'), default=False)
@@ -92,24 +92,24 @@ GENDER = (
 
 
 
-class KYC(models.Model):
-    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
-    user =  models.OneToOneField(User, on_delete=models.CASCADE)
-    account =  models.OneToOneField(Account, on_delete=models.CASCADE, null=True, blank=True)
-    frist_name = models.CharField(max_length=1000)
-    last_name = models.CharField(max_length=1000)
-    image = models.ImageField(upload_to="kyc", default="default.jpg")
-    marrital_status = models.CharField(choices=MARITAL_STATUS, max_length=40)
-    gender = models.CharField(choices=GENDER, max_length=40)
-    date_of_birth = models.DateTimeField(auto_now_add=False)
-    company = models.CharField(max_length=100)
-    mobile = models.CharField(max_length=1000)
-    date = models.DateTimeField(auto_now_add=True)
+# class KYC(models.Model):
+#     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+#     user =  models.OneToOneField(User, on_delete=models.CASCADE)
+#     account =  models.OneToOneField(Account, on_delete=models.CASCADE, null=True, blank=True)
+#     frist_name = models.CharField(max_length=1000)
+#     last_name = models.CharField(max_length=1000)
+#     image = models.ImageField(upload_to="kyc", default="default.jpg")
+#     marrital_status = models.CharField(choices=MARITAL_STATUS, max_length=40)
+#     gender = models.CharField(choices=GENDER, max_length=40)
+#     date_of_birth = models.DateTimeField(auto_now_add=False)
+#     company = models.CharField(max_length=100)
+#     mobile = models.CharField(max_length=1000)
+#     date = models.DateTimeField(auto_now_add=True)
 
 
-    def __str__(self):
-        return f"{self.user}"    
+#     def __str__(self):
+#         return f"{self.user}"    
 
     
-    class Meta:
-        ordering = ['-date']
+#     class Meta:
+#         ordering = ['-date']

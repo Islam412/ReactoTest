@@ -2,7 +2,7 @@ from django.contrib import admin
 
 
 from import_export.admin import ImportExportModelAdmin
-from userauths.models import User , Account , KYC
+from userauths.models import User , Account 
 
 
 # Register your models here.
@@ -28,11 +28,11 @@ class AccountAdminModel(ImportExportModelAdmin):
     search_fields = ['user__username', 'user__email', 'account_number']
 
 
-class KYCAdmin(ImportExportModelAdmin):
-    search_fields = ["frist_name" , "last_name" , "account"]
-    list_display = ['user', 'frist_name' , "last_name", 'gender', 'date_of_birth'] 
+# class KYCAdmin(ImportExportModelAdmin):
+#     search_fields = ["frist_name" , "last_name" , "account"]
+#     list_display = ['user', 'frist_name' , "last_name", 'gender', 'date_of_birth'] 
 
 
 admin.site.register(User, UserCustomAdmin)
 admin.site.register(Account, AccountAdminModel)
-admin.site.register(KYC, KYCAdmin)
+# admin.site.register(KYC, KYCAdmin)

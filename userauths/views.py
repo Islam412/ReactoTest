@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 
-from .models import User , Account , KYC
-from .forms import UserRegisterForm , KYCForm , UserPasswordChangeForm
+from .models import User , Account 
+from .forms import UserRegisterForm  , UserPasswordChangeForm 
 
 
 
@@ -14,36 +14,37 @@ from .forms import UserRegisterForm , KYCForm , UserPasswordChangeForm
 
 def register_view(request):
     if request.user.is_authenticated:
-        messages.warning(request, f"You are already logged in.")
+        messages.warning(request, "You are already logged in.")
         return redirect("userauths:account")
-
     
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
-            username = form.cleaned_data['username']
-
-            messages.success(request, f'Account created for {username}! You are now able to log in.')
-
+            new_user = form.save(commit=False)
+            new_user.username = form.cleaned_data['username']  
+            new_user.save()
+            
+            messages.success(request, f'Account created for {new_user.username}! You are now able to log in.')
+            
             new_user = authenticate(
-                username = form.cleaned_data['email'],
-                password = form.cleaned_data['password1'],
+                request,
+                username=form.cleaned_data['email'],
+                password=form.cleaned_data['password1'],
             )
-
-            login(request, new_user)
-            return redirect("userauths:account")
-        
-
+            
+            if new_user is not None:
+                login(request, new_user)
+                return redirect("userauths:account")
+            else:
+                messages.error(request, "Authentication failed. Please log in manually.")
+                return redirect("userauths:login")
     else:
-        
         form = UserRegisterForm()
-
+    
     context = {
         'form': form,
     }
-
-    return render(request,'userauths/sign-up.html', context)
+    return render(request, 'userauths/sign-up.html', context)
 
 
 
@@ -82,33 +83,33 @@ def logout_view(request):
 
 
 
-@login_required
-def kyc_registration(request):
-    user = request.user
-    account = Account.objects.get(user=user)
+# @login_required
+# def kyc_registration(request):
+#     user = request.user
+#     account = Account.objects.get(user=user)
 
-    try:
-        kyc = KYC.objects.get(user=user)
-    except:
-        kyc = None
+#     try:
+#         kyc = KYC.objects.get(user=user)
+#     except:
+#         kyc = None
     
-    if request.method == "POST":
-        form = KYCForm(request.POST, request.FILES, instance=kyc)
-        if form.is_valid():
-            new_form = form.save(commit=False)
-            new_form.user = user
-            new_form.account = account
-            new_form.save()
-            messages.success(request, "KYC Form submitted successfully, In review now.")
-            return redirect("core:home")
-    else:
-        form = KYCForm(instance=kyc)
-    context = {
-        "account": account,
-        "form": form,
-        "kyc": kyc,
-    }
-    return render(request, "userauths/kyc-form.html", context)
+#     if request.method == "POST":
+#         form = KYCForm(request.POST, request.FILES, instance=kyc)
+#         if form.is_valid():
+#             new_form = form.save(commit=False)
+#             new_form.user = user
+#             new_form.account = account
+#             new_form.save()
+#             messages.success(request, "KYC Form submitted successfully, In review now.")
+#             return redirect("core:home")
+#     else:
+#         form = KYCForm(instance=kyc)
+#     context = {
+#         "account": account,
+#         "form": form,
+#         "kyc": kyc,
+#     }
+#     return render(request, "userauths/kyc-form.html", context)
 
 
 
@@ -119,7 +120,8 @@ def account(request):
             kyc = KYC.objects.get(user=request.user)
         except:
             messages.warning(request, "You need to submit your kyc")
-            return redirect("userauths:kyc-registration")
+            # return redirect("userauths:kyc-registration")
+            return redirect("core:home")
         
         account = Account.objects.get(user=request.user)
     else:
