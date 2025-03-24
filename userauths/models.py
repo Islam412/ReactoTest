@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.utils.translation import gettext_lazy as _
 
-from phonenumber_field.modelfields import PhoneNumberField
 
 import uuid
 from shortuuid.django_fields import ShortUUIDField
@@ -24,8 +23,8 @@ class User(AbstractUser):
     username = models.CharField(_('Username'), max_length=255)
     email = models.EmailField(_('Email'), unique=True)
     phone = models.CharField(_("Phone Number"),max_length=50, null=True, blank=True)
-    date_of_birth = models.DateTimeField(_('Date Of Birth'), auto_now_add=False , null=True, blank=True)
-    company = models.CharField(_('Company'), max_length=255 , null=True, blank=True)
+    company = models.CharField(_('Company'), max_length=255, null=True, blank=True)
+    date_of_birth = models.DateTimeField(_('Date Of Birth'), auto_now_add=False, blank=True, null=True)
     is_staff = models.BooleanField(_('Is Staff'), default=False)
     is_superuser = models.BooleanField(_('Super User'), default=False)
 
